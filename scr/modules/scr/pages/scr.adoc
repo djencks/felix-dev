@@ -1,4 +1,6 @@
 = Apache Felix Service Component Runtime (SCR)
+//Edit only the original at modules/scr/pages/scr.adoc
+//The copy at README.adoc will be overwritten by the build.
 
 The Apache Felix Service Component Runtime described by the https://osgi.org/specification/osgi.cmpn/7.0.0/service.component.html[OSGi Declarative Services Specification] is implemented by this bundle.
 The service component model described by `Declarative Services` uses a declarative way for publishing, finding and binding to OSGi services
