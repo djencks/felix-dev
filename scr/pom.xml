@@ -37,26 +37,26 @@
         <url>https://gitbox.apache.org/repos/asf?p=felix-dev.git</url>
       <tag>HEAD</tag>
   </scm>
-    
+
     <!--
         A Note on Testing
         =================
-        
+
         This project contains two kinds of tests: regular unit tests running
         in the test phase and integration tests based on PAX Exam running
         in the integration-test phase.
-        
+
         For running the integration tests from the console using Maven nothing
         special has to be done as the tests run automatically. To run the tests
         in your IDE, the project has to be built to the "package" phase with
         the profile "ide" enabled:
-        
+
              $ mvn -Pide clean package
-             
+
         This creates the scr.jar file in the target folder, which is used by
         the integration tests when run from the IDE. Alternatively the
         "project.bundle.file" system property may be set to the bundle JAR
-        in the IDE launcher. 
+        in the IDE launcher.
     -->
     <properties>
         <bundle.build.name>
@@ -67,8 +67,8 @@
         </bundle.file.name>
         <felix.ca.version>1.9.0</felix.ca.version>
     </properties>
-    
-    
+
+
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -170,14 +170,14 @@
             <version>4.13.3</version>
             <scope>test</scope>
         </dependency>
-    
+
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-link-mvn</artifactId>
             <version>4.13.3</version>
             <scope>test</scope>
         </dependency>
-    
+
         <dependency>
             <groupId>org.ops4j.pax.url</groupId>
             <artifactId>pax-url-aether</artifactId>
@@ -202,14 +202,14 @@
             <version>1.6.3</version>
             <scope>test</scope>
         </dependency>
-    
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
-    
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -301,7 +301,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <project.bundle.file>${bundle.file.name}</project.bundle.file>
-                        <felix.ca.version>${felix.ca.version}</felix.ca.version>    
+                        <felix.ca.version>${felix.ca.version}</felix.ca.version>
                     </systemPropertyVariables>
                     <excludes>
                         <exclude>**/components/**</exclude>
@@ -322,6 +322,31 @@
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <excludePackageNames>*.impl</excludePackageNames>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.6</version>
+                <executions>
+                    <execution>
+                        <id>process-readme</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDirectory>modules/scr/pages</sourceDirectory>
+                    <outputDirectory>.</outputDirectory>
+                    <inputFile>scr.adoc</inputFile>
+                    <outputFile>README.html</outputFile>
+                    <backend>html5</backend>
+                    <doctype>book</doctype>
+<!--                    <attributes>-->
+<!--                        <stylesheet>my-theme.css</stylesheet>-->
+<!--                    </attributes>-->
                 </configuration>
             </plugin>
         </plugins>
@@ -397,5 +422,5 @@
             </dependencies>
         </profile>
     </profiles>
-        
+
 </project>
