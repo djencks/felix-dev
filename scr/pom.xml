@@ -324,30 +324,50 @@
                     <excludePackageNames>*.impl</excludePackageNames>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.asciidoctor</groupId>-->
+<!--                <artifactId>asciidoctor-maven-plugin</artifactId>-->
+<!--                <version>1.5.6</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>process-readme</id>-->
+<!--                        <phase>generate-resources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>process-asciidoc</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <sourceDirectory>modules/scr/pages</sourceDirectory>-->
+<!--                    <outputDirectory>.</outputDirectory>-->
+<!--                    <inputFile>scr.adoc</inputFile>-->
+<!--                    <outputFile>README.html</outputFile>-->
+<!--                    <backend>html5</backend>-->
+<!--                    <doctype>book</doctype>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>1.5.6</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>process-readme</id>
-                        <phase>generate-resources</phase>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
                         <goals>
-                            <goal>process-asciidoc</goal>
+                            <goal>copy-resources</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>modules/scr/pages</directory>
+<!--                                    <filtering>true</filtering>-->
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <sourceDirectory>modules/scr/pages</sourceDirectory>
-                    <outputDirectory>.</outputDirectory>
-                    <inputFile>scr.adoc</inputFile>
-                    <outputFile>README.html</outputFile>
-                    <backend>html5</backend>
-                    <doctype>book</doctype>
-<!--                    <attributes>-->
-<!--                        <stylesheet>my-theme.css</stylesheet>-->
-<!--                    </attributes>-->
-                </configuration>
             </plugin>
         </plugins>
     </build>
